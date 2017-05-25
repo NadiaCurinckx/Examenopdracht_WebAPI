@@ -12,11 +12,11 @@ namespace WebApi.Controllers
     {
         
         private readonly BoekLogica _logica = new BoekLogica();
+        private readonly GenreLogica _genreLogica = new GenreLogica();
 
-
-        public Task<List<Boek>> Get()
+        public async Task<List<Boek>> Get()
         {
-            return _logica.NeemAlleBoeken();
+            return  await _logica.NeemAlleBoeken();
         }
 
         public async Task<Boek> Get(Int32 id)
@@ -25,9 +25,23 @@ namespace WebApi.Controllers
             return boeken.SingleOrDefault(x => x.Id == id);
         }
 
-        public Task Post(Boek boek)
+        public Task<Boek> Post(Boek boek)
         {
             return _logica.BewaarBoek(boek);
+        }
+
+        [HttpPost]
+        [Route("boeken/{id}/genres")]
+        public Task KoppelGenresVoorBoek(int id, List<int> genreIdsVoorBoek)
+        {
+            return _genreLogica.KoppelGenresVoorBoek(id, genreIdsVoorBoek);
+        }
+
+        [HttpGet]
+        [Route("boeken/{id}/genres")]
+        public Task<List<Genre>> GeefGenresVoorBoek(int id)
+        {
+            return _genreLogica.GeefGenresVoorBoek(id);
         }
 
         public Task Put(Int32 id, Boek boek)
