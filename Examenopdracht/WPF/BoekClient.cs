@@ -1,15 +1,13 @@
 ﻿using Model;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using RestSharp;
-using RestSharp.Deserializers;
 
 namespace WPF
 {
     public class BoekClient
     {
-
         private readonly RestClient _client = new RestClient("http://localhost:51672/");
 
         public async Task<List<Boek>> NeemAlleBoeken()
@@ -24,18 +22,12 @@ namespace WPF
             return await _client.GetTaskAsync<Boek>(request);
         }
 
-        ///*public Task BewaarBoek(Int32 code)
-        //{
-
-        //    }*/
-
         public Task<Boek> BewaarBoek(Boek boek)
         {
             var request = new RestRequest("boeken", Method.POST);
             request.AddJsonBody(boek);
             return _client.PostTaskAsync<Boek>(request);
         }
-
 
         public Task WijzigBoek(Boek boek)
         {
@@ -49,9 +41,5 @@ namespace WPF
             var request = new RestRequest($"boeken/{id}", Method.DELETE);
             return _client.ExecuteTaskAsync(request);
         }
-
-
-
-
     }
 }

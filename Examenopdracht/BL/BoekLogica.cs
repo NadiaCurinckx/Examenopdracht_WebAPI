@@ -22,19 +22,6 @@ namespace BL
             return _database.Boeken.SingleOrDefaultAsync(x => x.Id == code);
         }
 
-        /*public Task BewaarBoek(Int32 code)
-        {
-
-            var huidigBoek = _database.Boeken.SingleOrDefault(x => x.Id == code);
-
-            if (huidigBoek != null)
-            {
-                _database.Boeken.Add(huidigBoek);
-
-            }
-            return _database.SaveChangesAsync();
-        }*/
-
         public async Task<Boek> BewaarBoek(Boek boek)
         {
             var nieuwBoek = _database.Boeken.Add(boek);
@@ -42,13 +29,12 @@ namespace BL
             return nieuwBoek;
         }
 
-
         public async Task<int> WijzigBoek(Boek boek)
         {
             var huidigBoek = _database.Boeken.SingleOrDefault(x => x.Id == boek.Id);
 
             if (huidigBoek != null)
-            {                            
+            {
                 huidigBoek.Auteur = boek.Auteur;
                 huidigBoek.Titel = boek.Titel;
                 huidigBoek.AantalPaginas = boek.AantalPaginas;

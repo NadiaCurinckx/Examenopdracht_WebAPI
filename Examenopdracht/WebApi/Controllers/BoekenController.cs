@@ -10,13 +10,12 @@ namespace WebApi.Controllers
 {
     public class BoekenController : ApiController
     {
-        
         private readonly BoekLogica _boekLogica = new BoekLogica();
         private readonly GenreLogica _genreLogica = new GenreLogica();
-        
+
         public async Task<List<Boek>> Get()
         {
-            return  await _boekLogica.NeemAlleBoeken();
+            return await _boekLogica.NeemAlleBoeken();
         }
 
         public async Task<Boek> Get(Int32 id)

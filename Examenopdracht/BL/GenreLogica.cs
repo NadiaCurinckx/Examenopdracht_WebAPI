@@ -47,34 +47,5 @@ namespace BL
 
             return await _database.SaveChangesAsync();
         }
-
-        //public Task GenreOpslaan(Genre genre)
-        //{
-        //    _database.Genres.Add(genre);
-        //    return _database.SaveChangesAsync();
-        //}
-
-
-
-        //public async Task GenreWijzigen(Genre genre)
-        //{
-        //    var huidigGenre = await _database.Genres.SingleOrDefaultAsync(x => x.Id == genre.Id);
-        //    if (huidigGenre != null)
-        //    {
-        //        huidigGenre.Omschrijving = genre.Omschrijving;
-        //    }
-        //    await _database.SaveChangesAsync();
-        //}
-
-        //public async Task GenreVerwijderen(Int32 id)
-        //{
-        //    var huidigGenre = await _database.Genres.SingleOrDefaultAsync(x => x.Id == id);
-        //    if (huidigGenre != null)
-        //    {
-        //        _database.Genres.Remove(huidigGenre);
-        //    }
-        //    await _database.SaveChangesAsync();
-        //}
-
     }
 }
