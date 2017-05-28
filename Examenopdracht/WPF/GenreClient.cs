@@ -16,14 +16,14 @@ namespace WPF
             return _client.GetTaskAsync<List<Genre>>(request);
         }
 
-        internal Task KoppelGenresVoorBoek(int boekId, List<int> geselecteerdeGenreIds)
+        public Task KoppelGenresVoorBoek(int boekId, List<int> geselecteerdeGenreIds)
         {
             var request = new RestRequest($"boeken/{boekId}/genres", Method.POST);
             request.AddJsonBody(geselecteerdeGenreIds);
             return _client.ExecuteTaskAsync(request);
         }
 
-        internal Task<List<Genre>> GeefGenresVoorBoek(int boekId)
+        public Task<List<Genre>> GeefGenresVoorBoek(int boekId)
         {
             var request = new RestRequest($"boeken/{boekId}/genres", Method.GET);
             return _client.GetTaskAsync<List<Genre>>(request);
