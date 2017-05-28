@@ -8,9 +8,9 @@ using System.Data.Entity;
 
 namespace BL
 {
-    public    class GenreLogica : IGenreLogica
+    public class GenreLogica : IGenreLogica
     {
-        private readonly IBoekenDatabase _database = new BoekenDatabase();        
+        private readonly IBoekenDatabase _database = new BoekenDatabase();
 
         public Task<List<Genre>> NeemAlleGenres()
         {
@@ -40,6 +40,8 @@ namespace BL
                 }
 
                 var genres = await _database.Genres.Where(g => genreIds.Contains(g.Id)).ToListAsync();
+                boek.Genres = genres;
+
                 foreach (var genre in genres)
                 {
                     if (genre.Boeken == null)
@@ -48,7 +50,6 @@ namespace BL
                     }
                     genre.Boeken.Add(boek);
                 }
-                boek.Genres = genres;
             }
 
             return await _database.SaveChangesAsync();
