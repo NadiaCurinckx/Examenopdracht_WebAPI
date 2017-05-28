@@ -34,15 +34,21 @@ namespace BL
             var boek = await _database.Boeken.Include(x => x.Genres).FirstOrDefaultAsync(b => b.Id == boekId);
             if (boek != null)
             {
-
-                // TODO: ???
                 foreach (var genre in boek.Genres)
                 {
                     genre.Boeken?.Remove(boek);
                 }
 
                 var genres = await _database.Genres.Where(g => genreIds.Contains(g.Id)).ToListAsync();
-                boek.Genres = genres;             
+                foreach (var genre in genres)
+                {
+                    if (genre.Boeken == null)
+                    {
+                        genre.Boeken = new List<Boek>();
+                    }
+                    genre.Boeken.Add(boek);
+                }
+                boek.Genres = genres;
             }
 
             return await _database.SaveChangesAsync();
