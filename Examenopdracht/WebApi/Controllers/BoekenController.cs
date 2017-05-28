@@ -11,23 +11,22 @@ namespace WebApi.Controllers
     public class BoekenController : ApiController
     {
         
-        private readonly BoekLogica _logica = new BoekLogica();
+        private readonly BoekLogica _boekLogica = new BoekLogica();
         private readonly GenreLogica _genreLogica = new GenreLogica();
-
+        
         public async Task<List<Boek>> Get()
         {
-            return  await _logica.NeemAlleBoeken();
+            return  await _boekLogica.NeemAlleBoeken();
         }
 
         public async Task<Boek> Get(Int32 id)
         {
-            var boeken = await _logica.NeemAlleBoeken();
-            return boeken.SingleOrDefault(x => x.Id == id);
+            return await _boekLogica.NeemBoek(id);
         }
 
         public Task<Boek> Post(Boek boek)
         {
-            return _logica.BewaarBoek(boek);
+            return _boekLogica.BewaarBoek(boek);
         }
 
         [HttpPost]
@@ -46,32 +45,12 @@ namespace WebApi.Controllers
 
         public Task Put(Int32 id, Boek boek)
         {
-            return _logica.WijzigBoek(boek);
+            return _boekLogica.WijzigBoek(boek);
         }
 
         public Task Delete(Int32 id)
         {
-            return _logica.VerwijderBoek(id);
+            return _boekLogica.VerwijderBoek(id);
         }
-
-        //[HttpGet, Route("api/producten/totaleprijs")]
-        //public Task<Decimal> BerekenTotalePrijs()
-        //{
-        //    return _logica.BerekenTotalePrijs();
-        //}
-
-        //[HttpGet, Route("api/producten/totaalaantal")]
-        //public Task<Int32> BerekenTotaalAantalProducten()
-        //{
-        //    return _logica.BerekenTotaalAantalProducten();
-        //}
-
-
-
-
-
-
-
-
     }
 }
