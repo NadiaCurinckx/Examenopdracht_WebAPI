@@ -13,7 +13,6 @@ namespace WPF
         public Task<List<Boek>> NeemAlleBoeken()
         {
             var request = new RestRequest("boeken", Method.GET);
-            //onderstaande methode geeft null terug, maar de WebAPI geeft wel de juiste JSON/XML terug in Postman
             return _client.GetTaskAsync<List<Boek>>(request);
         }
 

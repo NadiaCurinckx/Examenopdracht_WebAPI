@@ -14,7 +14,5 @@ namespace WebApi.Controllers
         {
             return _logica.NeemAlleGenres();
         }
-
-
     }
 }
