@@ -10,11 +10,11 @@ namespace WPF
     {
         private readonly RestClient _client = new RestClient("http://localhost:51672/");
 
-        public async Task<List<Boek>> NeemAlleBoeken()
+        public Task<List<Boek>> NeemAlleBoeken()
         {
             var request = new RestRequest("boeken", Method.GET);
             //onderstaande methode geeft null terug, maar de WebAPI geeft wel de juiste JSON/XML terug in Postman
-            return await _client.GetTaskAsync<List<Boek>>(request);
+            return _client.GetTaskAsync<List<Boek>>(request);
         }
 
         public async Task<Boek> NeemBoek(Int32 id)
